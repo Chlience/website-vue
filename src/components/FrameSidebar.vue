@@ -2,10 +2,10 @@
     <div class="frame-sidebar">
         <div class="card card-sidebar">
             <router-link :to=" {name: 'TimeLine'} "> TimeLine </router-link>
-            <router-link :to=" {name: 'AddPost'} "> AddPost </router-link>
-            <router-link :to=" {name: 'UserLogin'} "> UserLogin </router-link>
-            <router-link :to=" {name: 'Register'} "> Register </router-link>
-            <router-link :to=" {name: 'UserLogout'} "> UserLogout </router-link>
+            <router-link :to=" {name: 'NewPost'} "> NewPost </router-link>
+            <router-link :to=" {name: 'UserLogin'} "> Login </router-link>
+            <router-link :to=" {name: 'UserRegister'} "> Register </router-link>
+            <router-link :to=" {name: 'UserLogout'} "> Logout </router-link>
             <router-link :to=" {name: 'TestIt'} "> TestIt </router-link>
         </div>
     </div>

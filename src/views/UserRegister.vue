@@ -1,54 +1,66 @@
 <template>
     <div class="card" style="width: 600px; align-items: center">
-        <div style="font-size: 20px"> Login </div>
+        <div style="font-size: 20px"> Register </div>
         <n-form label-placement="left" label-width="auto" label-align="right" size="large" style="margin: 20px">
             <n-form-item label="用户名" path="userName">
                 <n-input v-model:value="form.userName" placeholder="用户名" />
+            </n-form-item>
+            <n-form-item label="昵称" path="userName">
+                <n-input v-model:value="form.nickName" placeholder="昵称" />
             </n-form-item>
             <n-form-item label="密码" path="password">
                 <n-input v-model:value="form.password" type="password" :minlength="6" :maxlength="26" placeholder="密码"/>
             </n-form-item>
             <div style="display: flex; justify-content: flex-end">
-                <n-button attr-type="button" style="margin-inline: 10px" @click="router.push({name: 'UserRegister'})">
+                <n-button attr-type="button" @click="ClickRegister">
                     注册
-                </n-button>
-                <n-button attr-type="button" style="margin-inline: 10px" @click="clickLogin">
-                    登陆
                 </n-button>
             </div>
         </n-form>
+<!--</div>-->
+<!--    <div class="card" style="width: 600px">-->
+<!--        <div style="display: flex; flex-direction: column">-->
+<!--            <input v-model="form.userName" placeholder="username">-->
+<!--            <input v-model="form.nickName" placeholder="nickname">-->
+<!--            <input v-model="form.password" placeholder="password">-->
+<!--            <input type="submit" @click="clickRegister">-->
+<!--        </div>-->
+<!--        <div> {{form.value}} </div>-->
     </div>
 </template>
 
+
 <script setup>
+import { ref } from 'vue';
 import request from "@/utils/request";
-import router from "@/router/router";
-import store from "@/store/store"
-import {NInput, NButton, NFormItem, NForm} from 'naive-ui';
-import { ref } from 'vue'
+import router from "@/router/router"
+import { NForm, NFormItem, NInput, NButton} from "naive-ui";
 
 const form = ref({
     userName: null,
+    nickName: null,
     password: null,
 })
-function clickLogin() {
-    request.post("/user/login", form.value).then(res => {
-        console.log(res)
+
+function ClickRegister() {
+    console.log(form.value)
+    request.post("/user/register", form.value).then(res => {
         if(res.code === "200") {
-            store.dispatch('SET_USER', res.data);
-            console.log('登陆成功');
+            console.log('注册成功');
             console.log(res.data);
+        }
+        else {
+            console.log('注册失败');
+            console.log(res.msg);
             if(window.history.length <= 1)
                 router.push({name: 'TimeLine'})
             else
                 router.go(-1)
         }
-        else {
-            console.log('登陆失败');
-        }
     })
     form.value = {
         userName: null,
+        nickName: null,
         password: null,
     }
 }

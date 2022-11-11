@@ -4,33 +4,19 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import ChatCard from './ChatCard';
 import request from "@/utils/request";
+import {onMounted, ref} from 'vue'
 
-export default {
-    name: 'TimeLine',
-    components: {
-		ChatCard
-	},
-    data() {
-        return {
-            posts: []
-        }
-    },
-    methods: {
-        getAll() {
-            request.get("/post/getAllOrderByTime").then(res => {
-                this.posts = res.data;
-            })
-        },
-    },
-    mounted() {
-        request.get("/post/getAllOrderByTime").then(res => {
-            this.posts = res.data;
-        })
-    }
-}
+const posts = ref(null)
+
+onMounted(() => {
+    request.get("/post/getAllOrderByTime").then(res => {
+        posts.value = res.data;
+    })
+})
+
 </script>
 
 <style scoped>

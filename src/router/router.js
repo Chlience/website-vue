@@ -1,10 +1,10 @@
 import { createWebHistory, createRouter } from "vue-router";
 import TimeLine from "@/views/TimeLine";
-import AddPost from "@/views/AddPost";
+import NewPost from "@/views/NewPost";
 import UserLogin from  "@/views/UserLogin";
 import TestIt from "@/views/TestIt";
 import UserLogout from "@/views/UserLogout";
-import Register from "@/views/Register";
+import UserRegister from "@/views/UserRegister";
 import store from "@/store/store";
 
 const routes = [
@@ -19,9 +19,9 @@ const routes = [
         component: TimeLine,
     },
     {
-        path: "/AddPost",
-        name: "AddPost",
-        component: AddPost,
+        path: "/NewPost",
+        name: "NewPost",
+        component: NewPost,
         meta: {
             requireAuth: true, // 表示进入这个路由是需要登录的
             roles: ['admin', 'manager', 'user'],
@@ -34,8 +34,8 @@ const routes = [
     },
     {
         path: "/Register",
-        name: "Register",
-        component: Register,
+        name: "UserRegister",
+        component: UserRegister,
     },
     {
         path: "/UserLogout",
@@ -74,7 +74,6 @@ function hasPermission(route) {
 }
 
 router.beforeEach((to, from, next) => {
-    console.log(hasPermission(to));
     if(!hasPermission(to))
         next({ name: 'UserLogin' });
     else
