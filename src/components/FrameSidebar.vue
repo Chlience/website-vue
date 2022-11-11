@@ -4,6 +4,7 @@
             <router-link :to=" {name: 'TimeLine'} "> TimeLine </router-link>
             <router-link :to=" {name: 'AddPost'} "> AddPost </router-link>
             <router-link :to=" {name: 'UserLogin'} "> UserLogin </router-link>
+            <router-link :to=" {name: 'Register'} "> Register </router-link>
             <router-link :to=" {name: 'UserLogout'} "> UserLogout </router-link>
             <router-link :to=" {name: 'TestIt'} "> TestIt </router-link>
         </div>

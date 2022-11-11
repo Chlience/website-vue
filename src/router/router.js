@@ -4,6 +4,7 @@ import AddPost from "@/views/AddPost";
 import UserLogin from  "@/views/UserLogin";
 import TestIt from "@/views/TestIt";
 import UserLogout from "@/views/UserLogout";
+import Register from "@/views/Register";
 import store from "@/store/store";
 
 const routes = [
@@ -32,6 +33,11 @@ const routes = [
         component: UserLogin,
     },
     {
+        path: "/Register",
+        name: "Register",
+        component: Register,
+    },
+    {
         path: "/UserLogout",
         name: "UserLogout",
         component: UserLogout,
@@ -52,7 +58,7 @@ function isAuthenticated() {
     return store.state.user != null;
 }
 
-function hasPermission(user, route) {
+function hasPermission(route) {
     if(route.meta.requireAuth !== true)
         return true;
     else {
@@ -68,16 +74,10 @@ function hasPermission(user, route) {
 }
 
 router.beforeEach((to, from, next) => {
-    if((to.name !== 'UserLogin') && !isAuthenticated())
+    console.log(hasPermission(to));
+    if(!hasPermission(to))
         next({ name: 'UserLogin' });
-    else {
-        let user = store.state.user;
-        console.log(hasPermission(user, to));
-        if(!hasPermission(user, to))
-            next({ name: 'UserLogin' });
-        else
-            next();
-    }
-
+    else
+        next();
 })
 export default router;
