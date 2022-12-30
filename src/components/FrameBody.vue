@@ -26,6 +26,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: flex-start;
         margin: 4px;
     }
     .frame-content {

@@ -1,22 +1,23 @@
 import { createWebHistory, createRouter } from "vue-router";
-import TimeLine from "@/views/TimeLine";
+import UserPost from "@/views/UserPost";
 import NewPost from "@/views/NewPost";
 import UserLogin from  "@/views/UserLogin";
 import TestIt from "@/views/TestIt";
-import UserLogout from "@/views/UserLogout";
+import UserHome from "@/views/UserHome";
 import UserRegister from "@/views/UserRegister";
+import EmptyPage from "@/views/EmptyPage"
 import store from "@/store/store";
 
 const routes = [
     {
         path: "/",
         name: "Home",
-        redirect: { name: 'TimeLine' },
+        redirect: { name: 'UserPost' },
     },
     {
-        path: "/TimeLine",
-        name: "TimeLine",
-        component: TimeLine,
+        path: "/UserPost",
+        name: "UserPost",
+        component: UserPost,
     },
     {
         path: "/NewPost",
@@ -38,14 +39,20 @@ const routes = [
         component: UserRegister,
     },
     {
-        path: "/UserLogout",
-        name: "UserLogout",
-        component: UserLogout,
+        path: "/UserHome",
+        name: "UserHome",
+        component: UserHome,
+        props: true,
     },
     {
         path: "/TestIt",
         name: "TestIt",
         component: TestIt,
+    },
+    {
+        path: "/EmptyPage",
+        name: "EmptyPage",
+        component: EmptyPage,
     }
 ];
 
